@@ -5,9 +5,11 @@ import { useRef, useEffect, useState } from 'react';
 interface BestSeller {
   id: number;
   name: string;
+  collection: string;
   game: string;
   price: string;
   image: string;
+  tags: string[];
 }
 
 export default function BestSellersCarousel() {
@@ -140,7 +142,7 @@ export default function BestSellersCarousel() {
                   <img
                     src={card.image}
                     alt={card.name}
-                    className="w-full h-48 object-contain rounded"
+                    className="w-full h-48 object-contain rounded-xl"
                   />
                   <div className="absolute top-2 right-2 bg-myp-secondary text-black px-2 py-1 rounded text-xs font-semibold">
                     {card.game}
@@ -153,6 +155,13 @@ export default function BestSellersCarousel() {
                   <p className="text-myp-primary font-bold text-lg">
                     {card.price}
                   </p>
+                  <div className="flex flex-wrap gap-2">
+                    {card.tags.map((tag, index) => (
+                      <span key={tag + index} className="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-500/10 ring-inset">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                   <button className="w-full mt-3 bg-myp-primary text-white py-2 rounded-lg text-sm font-semibold hover:bg-opacity-90 transition-colors">
                     Comprar
                   </button>

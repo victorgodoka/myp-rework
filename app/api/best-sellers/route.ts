@@ -5,44 +5,56 @@ export async function GET() {
     {
       id: 1,
       name: 'Blue-Eyes White Dragon',
+      collection: '',
+      tags: ['Arte Alternativa', 'Secret Rare'],
       game: 'Yu-Gi-Oh!',
       price: 'R$ 150,00',
-      image: 'https://placehold.co/200x280/05ccd4/ffffff?text=Blue-Eyes'
+      image: '/images/blueyes.png'
     },
     {
       id: 2,
       name: 'Charizard GX',
+      collection: '',
+      tags: ['Full Art'],
       game: 'Pokémon',
       price: 'R$ 200,00',
-      image: 'https://placehold.co/200x280/ffd626/000000?text=Charizard'
+      image: '/images/charizard-gx-sm111.jpg'
     },
     {
       id: 3,
       name: 'Black Lotus',
+      collection: '',
+      tags: [],
       game: 'Magic',
       price: 'R$ 500,00',
-      image: 'https://placehold.co/200x280/8b5cf6/ffffff?text=Black+Lotus'
+      image: '/images/blacklotus.jpg'
     },
     {
       id: 4,
       name: 'Dark Magician',
+      collection: '',
+      tags: [],
       game: 'Yu-Gi-Oh!',
       price: 'R$ 80,00',
-      image: 'https://placehold.co/200x280/ef4444/ffffff?text=Dark+Magician'
+      image: '/images/darkmagician.jpg'
     },
     {
       id: 5,
       name: 'Pikachu VMAX',
+      collection: '',
+      tags: ['Full Art'],
       game: 'Pokémon',
       price: 'R$ 120,00',
-      image: 'https://placehold.co/200x280/10b981/ffffff?text=Pikachu'
+      image: '/images/pokemon_viv_044_pt.webp'
     },
     {
       id: 6,
       name: 'Lightning Bolt',
+      collection: '',
+      tags: ['Foil'],
       game: 'Magic',
       price: 'R$ 45,00',
-      image: 'https://placehold.co/200x280/f59e0b/ffffff?text=Lightning'
+      image: '/images/LightningBolt.jpg'
     }
   ];
 
