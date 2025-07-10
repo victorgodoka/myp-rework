@@ -75,7 +75,7 @@ export default function BestSellersCarousel() {
   return (
     <Carousel title="Cartas Mais Vendidas">
       {bestSellers.map((card) => (
-        <div key={card.id} className="flex-shrink-0 w-[200px]">
+        <div key={card.id} className="flex-shrink-0 w-[240px]">
           <Card
             {...card}
             variant="carousel"

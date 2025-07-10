@@ -36,8 +36,8 @@ export default function Card({
   };
 
   const imageClasses = {
-    default: "w-full h-80 object-cover",
-    featured: "w-full h-80 object-cover",
+    default: "w-full h-80 object-contain",
+    featured: "w-full h-80 object-contain",
     carousel: "w-full h-48 object-contain rounded-xl"
   };
 
@@ -63,6 +63,20 @@ export default function Card({
           alt={name}
           className={imageClasses[variant]}
         />
+
+        {/* Tags */}
+        {tags.length > 0 && (
+          <div className="absolute bottom-2 left-2 flex justify-center flex-wrap gap-2">
+            {tags.map((tag, index) => (
+              <span
+                key={`${tag}-${index}`}
+                className="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-500/10 ring-inset"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        )}
         
         {/* Game badge */}
         <div className="absolute top-2 right-2 bg-myp-secondary text-black px-2 py-1 rounded text-xs font-semibold">
@@ -95,20 +109,6 @@ export default function Card({
         <p className="text-myp-primary font-bold text-lg mb-4">
           {price}
         </p>
-        
-        {/* Tags */}
-        {tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-4">
-            {tags.map((tag, index) => (
-              <span 
-                key={`${tag}-${index}`} 
-                className="inline-flex items-center rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 ring-1 ring-gray-500/10 ring-inset"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
-        )}
         
         {/* Action buttons */}
         <div className="flex space-x-3">

@@ -1,5 +1,5 @@
 // Typography
-export { H1, H2, H3, H4, P, Small, Caption } from './Typography';
+export { default as Typography } from './Typography';
 
 // Interactive Components
 export { default as Button } from './Button';

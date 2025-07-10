@@ -4,81 +4,46 @@ import { cn } from '@/lib/utils';
 interface TypographyProps {
   children: React.ReactNode;
   className?: string;
+  variant?: 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'small' | 'caption';
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'p' | 'span' | 'small';
 }
 
-export function H1({ children, className, ...props }: TypographyProps & React.HTMLAttributes<HTMLHeadingElement>) {
-  return (
-    <h1 
-      className={cn("text-4xl font-bold text-gray-900", className)} 
-      {...props}
-    >
-      {children}
-    </h1>
-  );
-}
+const Typography = React.forwardRef<HTMLElement, TypographyProps>(
+  ({ children, className, variant = 'p', as, ...props }, ref) => {
+    const variants = {
+      h1: "text-4xl font-bold text-gray-900",
+      h2: "text-3xl font-bold text-gray-900",
+      h3: "text-xl font-bold text-gray-900",
+      h4: "text-lg font-semibold text-gray-900",
+      p: "text-base text-gray-600 leading-relaxed",
+      small: "text-sm text-gray-500",
+      caption: "text-xs text-gray-400"
+    };
 
-export function H2({ children, className, ...props }: TypographyProps & React.HTMLAttributes<HTMLHeadingElement>) {
-  return (
-    <h2 
-      className={cn("text-3xl font-bold text-gray-900", className)} 
-      {...props}
-    >
-      {children}
-    </h2>
-  );
-}
+    const defaultElements = {
+      h1: 'h1',
+      h2: 'h2',
+      h3: 'h3',
+      h4: 'h4',
+      p: 'p',
+      small: 'small',
+      caption: 'span'
+    };
 
-export function H3({ children, className, ...props }: TypographyProps & React.HTMLAttributes<HTMLHeadingElement>) {
-  return (
-    <h3 
-      className={cn("text-xl font-bold text-gray-900", className)} 
-      {...props}
-    >
-      {children}
-    </h3>
-  );
-}
+    const Element = as || defaultElements[variant];
 
-export function H4({ children, className, ...props }: TypographyProps & React.HTMLAttributes<HTMLHeadingElement>) {
-  return (
-    <h4 
-      className={cn("text-lg font-semibold text-gray-900", className)} 
-      {...props}
-    >
-      {children}
-    </h4>
-  );
-}
+    return React.createElement(
+      Element,
+      {
+        ref,
+        className: cn(variants[variant], className),
+        ...props
+      },
+      children
+    );
+  }
+);
 
-export function P({ children, className, ...props }: TypographyProps & React.HTMLAttributes<HTMLParagraphElement>) {
-  return (
-    <p 
-      className={cn("text-base text-gray-600 leading-relaxed", className)} 
-      {...props}
-    >
-      {children}
-    </p>
-  );
-}
+Typography.displayName = 'Typography';
 
-export function Small({ children, className, ...props }: TypographyProps & React.HTMLAttributes<HTMLElement>) {
-  return (
-    <small 
-      className={cn("text-sm text-gray-500", className)} 
-      {...props}
-    >
-      {children}
-    </small>
-  );
-}
-
-export function Caption({ children, className, ...props }: TypographyProps & React.HTMLAttributes<HTMLElement>) {
-  return (
-    <span 
-      className={cn("text-xs text-gray-400", className)} 
-      {...props}
-    >
-      {children}
-    </span>
-  );
-} 
+export default Typography; 

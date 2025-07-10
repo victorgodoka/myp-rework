@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { H2, P, Card, CardSkeleton } from './ui';
+import { Typography, Card, CardSkeleton } from './ui';
 
 interface CardData {
   id: number;
@@ -50,10 +50,10 @@ export default function LatestReleases() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <H2>Últimos Lançamentos</H2>
-            <P className="max-w-2xl mx-auto">
+            <Typography variant="h2">Últimos Lançamentos</Typography>
+            <Typography variant="p" className="max-w-2xl mx-auto">
               Fique por dentro das novidades mais recentes do mundo dos card games
-            </P>
+            </Typography>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[...Array(4)].map((_, index) => (
@@ -70,7 +70,7 @@ export default function LatestReleases() {
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <H2>Últimos Lançamentos</H2>
+            <Typography variant="h2">Últimos Lançamentos</Typography>
             <p className="text-red-600">Erro: {error}</p>
           </div>
         </div>
@@ -82,10 +82,10 @@ export default function LatestReleases() {
     <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <H2>Últimos Lançamentos</H2>
-          <P className="max-w-2xl mx-auto">
+          <Typography variant="h2">Últimos Lançamentos</Typography>
+          <Typography variant="p" className="max-w-2xl mx-auto">
             Fique por dentro das novidades mais recentes do mundo dos card games
-          </P>
+          </Typography>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
