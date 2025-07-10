@@ -1,34 +1,85 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+
+interface Card {
+  id: number;
+  name: string;
+  game: string;
+  price: string;
+  image: string;
+}
+
 export default function LatestReleases() {
-  const latestReleases = [
-    {
-      id: 1,
-      name: 'Cyber Dragon Infinity',
-      game: 'Yu-Gi-Oh!',
-      price: 'R$ 180,00',
-      image: 'https://placehold.co/300x400/05ccd4/ffffff?text=Cyber+Dragon'
-    },
-    {
-      id: 2,
-      name: 'Mewtwo V',
-      game: 'Pokémon',
-      price: 'R$ 95,00',
-      image: 'https://placehold.co/300x400/ffd626/000000?text=Mewtwo'
-    },
-    {
-      id: 3,
-      name: 'Force of Will',
-      game: 'Magic',
-      price: 'R$ 75,00',
-      image: 'https://placehold.co/300x400/8b5cf6/ffffff?text=Force+of+Will'
-    },
-    {
-      id: 4,
-      name: 'Agumon',
-      game: 'Digimon',
-      price: 'R$ 45,00',
-      image: 'https://placehold.co/300x400/ef4444/ffffff?text=Agumon'
-    }
-  ];
+  const [latestReleases, setLatestReleases] = useState<Card[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchLatestReleases = async () => {
+      try {
+        const response = await fetch('/api/latest-releases');
+        if (!response.ok) {
+          throw new Error('Falha ao carregar os lançamentos');
+        }
+        const data = await response.json();
+        setLatestReleases(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Erro desconhecido');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLatestReleases();
+  }, []);
+
+  if (loading) {
+    return (
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Últimos Lançamentos
+            </h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Fique por dentro das novidades mais recentes do mundo dos card games
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[...Array(4)].map((_, index) => (
+              <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden animate-pulse">
+                <div className="h-80 bg-gray-200"></div>
+                <div className="p-6">
+                  <div className="h-6 bg-gray-200 rounded mb-2"></div>
+                  <div className="h-8 bg-gray-200 rounded mb-4"></div>
+                  <div className="flex space-x-3">
+                    <div className="flex-1 h-12 bg-gray-200 rounded-lg"></div>
+                    <div className="w-12 h-12 bg-gray-200 rounded-lg"></div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Últimos Lançamentos
+            </h2>
+            <p className="text-red-600">Erro: {error}</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-16 bg-white">
