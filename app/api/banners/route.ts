@@ -7,21 +7,21 @@ export async function GET() {
         id: 1,
         title: 'Yu-Gi-Oh!',
         description: 'Cartas raras e colecionáveis',
-        image: 'https://placehold.co/400x250/05ccd4/ffffff?text=Yu-Gi-Oh!+Destaque',
+        image: '/images/Yugihocollection2.jpg',
         alt: 'Yu-Gi-Oh! Destaque'
       },
       {
         id: 2,
         title: 'Pokémon',
         description: 'Edições limitadas',
-        image: 'https://placehold.co/400x250/ffd626/000000?text=Pokémon+Especial',
+        image: '/images/pokemontcg.webp',
         alt: 'Pokémon Especial'
       },
       {
         id: 3,
         title: 'Magic',
         description: 'Cartas lendárias',
-        image: 'https://placehold.co/400x250/8b5cf6/ffffff?text=Magic+The+Gathering',
+        image: '/images/mtg.png',
         alt: 'Magic The Gathering'
       }
     ],
@@ -29,25 +29,25 @@ export async function GET() {
       {
         id: 1,
         title: 'Digimon',
-        image: 'https://placehold.co/300x200/ef4444/ffffff?text=Digimon',
+        image: '/images/digimon.jpg',
         alt: 'Digimon'
       },
       {
         id: 2,
         title: 'One Piece',
-        image: 'https://placehold.co/300x200/10b981/ffffff?text=One+Piece',
+        image: '/images/onepiece.png',
         alt: 'One Piece'
       },
       {
         id: 3,
-        title: 'Cardfight',
-        image: 'https://placehold.co/300x200/f59e0b/ffffff?text=Cardfight',
+        title: 'Cardfight!! Vanguard',
+        image: '/images/vanguard.png',
         alt: 'Cardfight'
       },
       {
         id: 4,
         title: 'Outros',
-        image: 'https://placehold.co/300x200/8b5cf6/ffffff?text=Outros',
+        image: '/images/outros.jpg',
         alt: 'Outros'
       }
     ]

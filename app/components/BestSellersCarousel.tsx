@@ -1,53 +1,39 @@
 'use client'
 
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
+
+interface BestSeller {
+  id: number;
+  name: string;
+  game: string;
+  price: string;
+  image: string;
+}
 
 export default function BestSellersCarousel() {
   const carouselRef = useRef<HTMLDivElement>(null);
-  const bestSellers = [
-    {
-      id: 1,
-      name: 'Blue-Eyes White Dragon',
-      game: 'Yu-Gi-Oh!',
-      price: 'R$ 150,00',
-      image: 'https://placehold.co/200x280/05ccd4/ffffff?text=Blue-Eyes'
-    },
-    {
-      id: 2,
-      name: 'Charizard GX',
-      game: 'Pokémon',
-      price: 'R$ 200,00',
-      image: 'https://placehold.co/200x280/ffd626/000000?text=Charizard'
-    },
-    {
-      id: 3,
-      name: 'Black Lotus',
-      game: 'Magic',
-      price: 'R$ 500,00',
-      image: 'https://placehold.co/200x280/8b5cf6/ffffff?text=Black+Lotus'
-    },
-    {
-      id: 4,
-      name: 'Dark Magician',
-      game: 'Yu-Gi-Oh!',
-      price: 'R$ 80,00',
-      image: 'https://placehold.co/200x280/ef4444/ffffff?text=Dark+Magician'
-    },
-    {
-      id: 5,
-      name: 'Pikachu VMAX',
-      game: 'Pokémon',
-      price: 'R$ 120,00',
-      image: 'https://placehold.co/200x280/10b981/ffffff?text=Pikachu'
-    },
-    {
-      id: 6,
-      name: 'Lightning Bolt',
-      game: 'Magic',
-      price: 'R$ 45,00',
-      image: 'https://placehold.co/200x280/f59e0b/ffffff?text=Lightning'
-    }
-  ];
+  const [bestSellers, setBestSellers] = useState<BestSeller[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchBestSellers = async () => {
+      try {
+        const response = await fetch('/api/best-sellers');
+        if (!response.ok) {
+          throw new Error('Falha ao carregar os mais vendidos');
+        }
+        const data = await response.json();
+        setBestSellers(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'Erro desconhecido');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBestSellers();
+  }, []);
 
   const scrollLeft = () => {
     if (carouselRef.current) {
@@ -66,6 +52,63 @@ export default function BestSellersCarousel() {
       });
     }
   };
+
+  if (loading) {
+    return (
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-3xl font-bold text-gray-900">
+              Cartas Mais Vendidas
+            </h2>
+            <div className="flex space-x-2">
+              <div className="p-2 rounded-full bg-white shadow-md animate-pulse">
+                <div className="w-5 h-5 bg-gray-300 rounded"></div>
+              </div>
+              <div className="p-2 rounded-full bg-white shadow-md animate-pulse">
+                <div className="w-5 h-5 bg-gray-300 rounded"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="overflow-hidden flex gap-4 w-full">
+            {[...Array(6)].map((_, index) => (
+              <div key={index} className="flex-shrink-0 w-[200px]">
+                <div className="bg-white rounded-lg shadow-md overflow-hidden animate-pulse">
+                  <div className="relative p-2 py-4 bg-gray-100">
+                    <div className="w-full h-48 bg-gray-200 rounded"></div>
+                    <div className="absolute top-2 right-2 bg-gray-300 px-2 py-1 rounded text-xs">
+                      <div className="w-12 h-3 bg-gray-400 rounded"></div>
+                    </div>
+                  </div>
+                  <div className="p-4">
+                    <div className="h-4 bg-gray-200 rounded mb-2"></div>
+                    <div className="h-6 bg-gray-200 rounded mb-3"></div>
+                    <div className="h-8 bg-gray-200 rounded"></div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Cartas Mais Vendidas
+            </h2>
+            <p className="text-red-600">Erro: {error}</p>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-16 bg-gray-50">
