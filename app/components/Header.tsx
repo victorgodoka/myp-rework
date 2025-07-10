@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { SearchInput, Button } from './ui';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,6 +26,11 @@ export default function Header() {
     'Digimon',
     'One Piece'
   ];
+
+  const handleSearch = (value: string) => {
+    console.log('Searching for:', value);
+    // Implement search functionality
+  };
 
   return (
     <header className="bg-white shadow-sm border-b relative">
@@ -50,25 +56,16 @@ export default function Header() {
           </div>
           
           <div className="flex-1 max-w-2xl mx-8">
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Buscar cartas..."
-                className="w-full px-4 py-2 pl-10 pr-4 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-myp-primary focus:border-transparent"
-              />
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <i className="icon-[lucide--search] text-gray-400"></i>
-              </div>
-            </div>
+            <SearchInput onSearch={handleSearch} />
           </div>
           
           <div className="flex items-center space-x-4">
-            <button className="text-gray-700 hover:text-myp-primary transition-colors">
+            <Button variant="ghost">
               Entrar
-            </button>
-            <button className="bg-myp-primary text-white px-4 py-2 rounded-lg hover:bg-opacity-90 transition-colors">
+            </Button>
+            <Button>
               Cadastrar
-            </button>
+            </Button>
           </div>
         </div>
         
